@@ -1,0 +1,10 @@
+{
+    "fields" : [
+        { "FieldName" : "TransactionDate", "DataType" : "Date" },
+        { "FieldName" : "Description", "DataType" : "String" },
+        { "FieldName" : "Amount", "DataType" : "Decimal(18,2)" },
+        { "FieldName" : "Balance", "DataType" : "Decimal(18,2)" }
+        
+    ],
+    "skip_lines_until" : {"LineNumber" : -1}
+}

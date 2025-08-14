@@ -1,0 +1,13 @@
+{
+    "data_feeds" : {
+        "bank1": {
+            "schema_file" : "./schema_files/bank1.json",
+            "data_files" : "folder path here"
+        },
+        "bank2": {
+            "schema_file" : "./schema_files/bank2.json",
+            "data_files" : "folder path here"
+        }
+    
+    }
+}
