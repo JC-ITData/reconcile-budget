@@ -1,5 +1,5 @@
 {
-    "data_feeds" : {
+    "bank_data_feeds" : {
         "bank1": {
             "schema_file" : "./schema_files/bank1.json",
             "data_files" : "folder path here"
@@ -9,5 +9,9 @@
             "data_files" : "folder path here"
         }
     
+    },
+    "budget_data_feed" : {
+        "schema_file" : "./schema_files/budget_app1.json",
+        "data_files" : "folder path here"
     }
 }

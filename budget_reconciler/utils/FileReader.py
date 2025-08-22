@@ -16,7 +16,7 @@ class FileReader(ABC):
 
         path_obj = Path(file_path)
         if not(path_obj.exists()):
-            message = f"Error: {file_desc} was not found."
+            message = f"Error: {file_desc} was not found. {str(path_obj)}"
             logging.error(message)
             raise FileNotFoundError(message)
         
@@ -52,7 +52,7 @@ class FileReader(ABC):
         pass
 
 class JsonFileReader(FileReader):
-    def _read_file(self, file_path: str,**kwargs) -> dict :
+    def _read_file(self, file_path: str) -> dict :
         try :
             with open(file_path, 'r') as json_file:
                 return_hash = json.load(json_file)
@@ -68,9 +68,30 @@ class JsonFileReader(FileReader):
         return return_dict
 
 class CsvFileReader(FileReader):
-    def _read_file(self, file_path: str, delimiter: str) -> pd.DataFrame:
+    def _read_file(self, file_path: str, delimiter: str, skip_until: dict = None) -> pd.DataFrame:
+        
+        # setting for do not skip any lines:
+        # "skip_lines_until" : {"LineNumber" : -1}
+
+        if skip_until != None :
+            if 'LineNumber' in skip_until.keys():
+                line_start_num = skip_until['LineNumber']
+            elif 'StringMatch' in skip_until.keys():
+                search_str = skip_until['StringMatch']
+                with open(file_path,'r') as file1:
+                    for i,line in enumerate(file1):
+                        if line.startswith(search_str):
+                            line_start_num = i
+            else :
+                raise "Skip until setting not recognized. " + str(skip_until)
+        else :
+            line_start_num = -1
+
         try :
-            return_df = pd.read_csv(file_path, delimiter=delimiter)
+            if line_start_num == -1:
+                return_df = pd.read_csv(file_path, delimiter=delimiter)
+            else:
+                return_df = pd.read_csv(file_path, delimiter=delimiter, skiprows=line_start_num)
         except Exception as e:
             logging.error(f"Error reading csv into pandas dataframe : {file_path}\n{e}")
             raise
@@ -79,6 +100,5 @@ class CsvFileReader(FileReader):
     def _combine_read_files(self,results_list: list[pd.DataFrame]) -> pd.DataFrame:
         return_df = pd.DataFrame()
         for df in results_list :
-            # return_df = return_df.union(df, sort=False, all=True)
             return_df = pd.concat([return_df,df],ignore_index=True)
         return return_df
