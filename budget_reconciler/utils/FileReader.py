@@ -37,8 +37,7 @@ class FileReader(ABC):
             except Exception as e:
                 logging.error(f"An unexpected error occurred while reading {file_desc}: {e}")
                 raise
-            finally:
-                logging.info(f"{file_desc} read.")
+            logging.info(f"{file_desc} read.")
 
         return_data = self._combine_read_files(results_list)
         return return_data

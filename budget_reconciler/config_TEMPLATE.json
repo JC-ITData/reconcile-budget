@@ -1,17 +1,17 @@
 {
     "bank_data_feeds" : {
         "bank1": {
-            "schema_file" : "./schema_files/bank1.json",
+            "schema_file" : ".\\budget_reconciler\\schema_files\\layer_bronze\\bank1.json",
             "data_files" : "folder path here"
         },
         "bank2": {
-            "schema_file" : "./schema_files/bank2.json",
+            "schema_file" : ".\\budget_reconciler\\schema_files\\layer_bronze\\bank2.json",
             "data_files" : "folder path here"
         }
     
     },
     "budget_data_feed" : {
-        "schema_file" : "./schema_files/budget_app1.json",
+        "schema_file" : ".\\budget_reconciler\\schema_files\\layer_bronze\\budget_app1.json",
         "data_files" : "folder path here"
     }
 }
