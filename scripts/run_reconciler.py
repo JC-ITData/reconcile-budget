@@ -1,6 +1,6 @@
 
-from budget_reconciler.transactions.BankAccountTransaction import BankAccountTransaction
-from budget_reconciler.transactions.BudgetTransaction import BudgetTransaction
+from budget_reconciler.transaction.BankAccountTransaction import BankAccountTransaction
+from budget_reconciler.transaction.BudgetTransaction import BudgetTransaction
 
 config_file_name = "./budget_reconciler/config.json"
 
